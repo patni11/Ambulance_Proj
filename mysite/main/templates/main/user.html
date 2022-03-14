@@ -1,0 +1,54 @@
+{% extends "main/Ambulance_data.html"%}
+{% load crispy_forms_tags %}
+<body>
+    
+        {% block content %}
+
+            {% if user.is_authenticated %}
+            <center>
+                <div class="signUpBox" style="background-color: #e0f7fa; padding: 5em; border-radius: 30px; margin: 2em;">
+                    {% if availability %}
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <br/><br/>
+                    <button type="submit" class="waves-effect blue lighten-1 hoverable btn-large col s6 offset-s3 offset+s3">Book Ambulance</button>
+                </form>
+                {% else %}
+                <h3 class="signUpChild" style="align-self: center; font-size:3vw;"> Booking Full, Please Try Again Later </h3>
+                {% endif %}
+            </div>
+            </center>
+            
+            {% else %}
+            <center>
+                <div class="signUpBox" style="background-color: #e0f7fa; margin-top: 2em; border-radius: 30px;">
+                    <div class="row">
+                        <h3 class="signUpChild" style="align-self: center;"> PLEASE SIGN UP TO USE THE FREE SERVICE </h3>
+                    </div>
+                    <div class="row">
+                    <a class="waves-effect blue lighten-1 hoverable btn-large col s6 offset-s3 offset+s3" href="register">Sign Up</a>
+                    </div>
+                    
+                    <div class="row">
+                        <p class="col s4 offset-s4 offset+s4" style="vertical-align: text-top;"> Existing User? <a class="waves-effect blue lighten-1 hoverable btn-small" href="login" style="margin:20px;">Sign In</a> </p>
+                        
+                    </div>
+                </div>
+            </center>
+            
+
+            {% endif %}
+            <Center>
+            <div class="row">
+            <div class="signUpBox col s6 m8" style="background-color: #ffcdd2; padding: 0.8em; border-radius: 30px;">
+                <h6 class="signUpChild" style="align-self: center;"> THE SERVICE IS ONLY AVAILABLE IN CHHINDWARA DISTRICT! </h6> 
+            </div>
+            <script class="col s6 m4" type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="shubhpatni" data-color="#FFDD00" data-emoji=""  data-font="Cookie" data-text="Support Us" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+            </Center>
+        </div>
+    
+        {% endblock %}
+      
+</body>
+

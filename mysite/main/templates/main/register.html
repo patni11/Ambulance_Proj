@@ -1,0 +1,29 @@
+{% extends "main/Ambulance_data.html"%}
+
+{% load crispy_forms_tags %}
+
+
+    
+        {% block content %}
+        <center>
+        <legend> <a href="/"><h2 class="col s3"style="font-family: 'Russo One', sans-serif; margin-top: 20px;">🚑 </h2></a> <h3 style="font-family: 'Russo One', sans-serif;"> Sign Up Form </h3> </legend>
+        
+        
+        <div class="signUpBox" style="background-color: #e0f7fa; padding: 5em; border-radius: 30px; margin: 2em;">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <br/><br/>
+                <button type="submit" class="waves-effect blue lighten-1 hoverable btn-large col s6 offset-s3 offset+s3">Sign Up</button>
+            </form>
+            <br/>
+            <div class="row">
+                <p class="col" style="vertical-align: text-top;"> Existing User? </p>    
+                <a class="col waves-effect teal lighten-1 hoverable btn-small" href="/login" >Sign In</a> 
+            </div>
+        </div>
+    </center>
+        {% endblock %}
+      
+
+

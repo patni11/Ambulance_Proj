@@ -1,0 +1,78 @@
+{% extends "main/Ambulance_data.html"%}
+<body>
+        
+    {% block content %}
+    <div class="signUpBox" style="background-color: #e0f7fa; padding: 0.1em; border-radius: 30px; margin: 2em;">
+      <Center><h3 style="font-family: 'Russo One', sans-serif;"> Current Patient </h3></Center>
+  </div>
+    
+    {% if current_patient.next_patient_to_pick_up == True %}
+    <div class="col s6 m6">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text">
+              <span class="card-title"> <strong style="color: coral;">Contact Number:- </strong>{{ current_patient.contact_num }}</span> 
+              
+            <p style="text-align: left;"> <strong style="color: coral;"> Pickup Location: </strong> {{ current_patient.pickup_location }} </p>
+            <br/>
+            <p style="text-align: left;"> <strong style="color: coral;"> Drop Location: </strong> {{ current_patient.drop_location }} </p>
+            <br/>
+            <p style="text-align: left;"> <strong style="color: coral;"> Patient Name: </strong> {{ current_patient.name }} </p>
+            <p style="text-align: left;"> <strong style="color: coral;"> Caretaker Name: </strong> {{ patient.name }} </p>
+            
+            <form method="GET", onsubmit="return confirm('Are you sure you want to delete this patient data?')">
+              {% csrf_token %}
+           <button class="btn-floating halfway-fab waves-effect waves-light grey" name = "DeleteButton" value="{{current_patient.id}}"> <i class="large material-icons"> delete_forever </i> </button>
+            </form>
+          
+          </div>
+          <div class="card-action">
+            <div class="row">
+                {% if current_patient.patient_picked_up == False %}
+                <div class="col s6 m6">                    
+                    <a class="waves-effect blue lighten-1 hoverable btn-large" href="/driver-verification"> <strong>Patient Picked Up</strong></a>    
+                </div>
+                {% endif %}
+            <div class="col s6 m6">
+                <a class="waves-effect blue lighten-1 hoverable btn-large" href="/patient-delivered"> <strong>Patient Delivered</strong></a>
+            </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      {% endif %}
+      <div class="signUpBox" style="background-color: #e0f7fa; padding: 0.1em; border-radius: 30px; margin: 2em;">
+      <Center><h3 style="font-family: 'Russo One', sans-serif;"> Next Patients In Line </h3></Center>
+      </div>
+  <div class="row">
+    {% for patient in patients %}
+    
+    {% if patient.next_patient_to_pick_up == False %}
+    <div class="col s6 m6">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title"> <strong style="color: coral;">Contact Number:- </strong>{{ patient.contact_num }}</span>
+          
+          <p style="text-align: left;"> <strong style="color: coral;"> Pickup Location: </strong> {{ patient.pickup_location }} </p>
+          <br/>
+          <p style="text-align: left;"> <strong style="color: coral;"> Drop Location: </strong> {{ patient.drop_location }} </p>
+          <br/>
+          <p style="text-align: left;"> <strong style="color: coral;"> Patient Name: </strong> {{ patient.name }} </p>
+          <p style="text-align: left;"> <strong style="color: coral;"> Caretaker Name: </strong> {{ patient.name }} </p>
+          
+          <form method="GET", onsubmit="return confirm('Are you sure you want to delete this patient data?')">
+            {% csrf_token %}
+         <button class="btn-floating halfway-fab waves-effect waves-light grey" name = "DeleteButton" value="{{patient.id}}"> <i class="large material-icons"> delete_forever </i> </button>
+          </form>
+        
+        </div>
+      </div>
+    </div>
+    {% endif %}
+      {% endfor %}
+  </div>
+
+    </center>
+    {% endblock %}
+  
+</body>

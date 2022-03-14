@@ -1,0 +1,33 @@
+{% extends "main/Ambulance_data.html" %}
+
+{% block content %}
+<body>
+    
+    <center>
+        <legend> <a href="/"><h2 class="col s3"style="font-family: 'Russo One', sans-serif; margin-top: 20px;">🚑 </h2></a> <h3 style="font-family: 'Russo One', sans-serif;"> Login <Input:checkbox></Input:checkbox> </h3> </legend>
+    </center>
+        <div class="signUpBox">
+        <form method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <br/><br/>
+            <div class="row">
+                <button type="submit" class="waves-effect blue lighten-1 hoverable btn-large col s6 offset-s3 offset+s3">Login</button>            
+            </div>
+            <br/>
+            <div class="row">
+            <p class="col" style="vertical-align: text-top;" style="margin-top:20px;"> Forgot Password? </p>    
+            <a class="col waves-effect teal lighten-1 hoverable btn-small" href="/password_reset" >Reset Password</a> 
+            </div>
+            
+            <div class="row">
+            <p class="col" style="vertical-align: text-top;"  style="margin-top:20px;"> Don't have an account? </p>    
+            <a class="col waves-effect teal lighten-1 hoverable btn-small" href="/register">Sign Up</a> 
+            </div>
+        
+        </form>
+        </div>
+        
+</body>
+{% endblock content %}
+

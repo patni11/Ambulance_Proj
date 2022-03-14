@@ -1,0 +1,113 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, target-densityDpi=device-dpi">
+    
+    <style>
+        .help-block{
+            font-family: 'Rubik', sans-serif;
+            color: grey;
+        }
+        .alert{
+            font-family: 'Rubik', sans-serif;
+            font-size: large;
+            color: red; 
+        }
+        #error_1_id_username{
+            font-family: 'Rubik', sans-serif;
+            font-size: large;
+            color: red; 
+        }
+        #error_1_id_password2{
+            font-family: 'Rubik', sans-serif;
+            font-size: large;
+            color: red; 
+        }
+        #error_1_id_password1{
+            font-family: 'Rubik', sans-serif;
+            font-size: large;
+            color: red; 
+        }
+        label[for]{
+            font-family: 'Rubik', sans-serif;
+            font-size: medium;
+            color: black;
+        }
+        .signUpBox {
+            background-color: #e0f7fa; 
+            border-radius: 30px; 
+            margin: 2em;
+            justify-content: center;
+            font-family: 'Rubik', sans-serif;
+            padding: 2em; 
+        }
+
+        @media only screen and (max-width:700px){
+            #textCard {
+                border-radius: 50px;
+                color: white;
+                font-size: 12px;
+                display: inline-block;
+                font-family: 'Rubik', sans-serif;
+            }
+            .signUpBox {
+                background-color: #e0f7fa; 
+                border-radius: 10px; 
+                margin: 1em;
+                justify-content: center;
+                font-family: 'Rubik', sans-serif;
+            }
+        }
+
+    </style>
+    {% load static%}
+    <!-- Compiled and minified CSS -->
+    <!-- CSS only -->
+    <link rel="stylesheet" href="{% static 'main/css/materialize.css'%}">
+    <link rel="stylesheet" href="{% static 'main/css/userpage.css'%}">
+    <link rel="stylesheet" href="{% static 'main/css/rubik.css'%}">
+    <link rel="stylesheet" href="{% static 'main/css/russo.css'%}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+ {% for ambulance in ambulance_data %}
+
+    <center>      
+        
+        <div class="row container">
+            <center>
+                <div class="row">
+            <a href="/"><h1 class="center-align" style="font-family: 'Russo One', sans-serif; margin-top: 20px">🚑 </h1></a>
+            <h2 style="font-family: 'Russo One', sans-serif;"> FREE AMBULANCE SEVA</h2>
+            </div>
+            
+            {% if user.is_authenticated %}
+                <div class="row">
+                <a class="waves-effect red lighten-1 hoverable btn-large col s6 offset-s3 offset+s3" href="logout">Logout</a>
+                </div>
+            {% endif %}
+            
+            {% if ambulance.ambulance_state == True and availability == True%}
+                <div id="textCard" class="card-panel orange darken-1 center-align" > <strong> {{ambulance}}, Join the Queue </strong></div>
+                <div id="textCard" class="card-panel blue lighten-1 center-align"> <strong> IT WILL BE AVAILABLE IN {{patient_len}} HOURS APPROX</strong></div>
+            {% elif ambulance.ambulance_state == True and availability == False%}
+                <div  class="col s6 m6 l6 card-panel red lighten-2 lighten-1 center-align" style="box-shadow: 5px 10px;"> <strong> {{ambulance}} 🔴</strong></div>
+            {% else %}
+                <div id="textCard" class="col s6 m6 l6 card-panel blue lighten-1 center-align"> <strong> {{ambulance}} 🟢  </strong></div>
+            
+            {% endif %}
+            </center>
+        </div>
+        
+    </center>
+    {% endfor %}
+    {% include "includes/messages.html" %}
+    <div class="container">
+        {% block content %}
+
+        {% endblock %}
+    </div>
+    
+</body>
+
+

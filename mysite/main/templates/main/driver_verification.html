@@ -1,0 +1,28 @@
+{% extends "main/Ambulance_data.html" %}
+
+{% block content %}
+<body>
+    
+    <center>
+        <legend> <h3 style="font-family: 'Russo One', sans-serif;"> Enter Otp Given By Patient <Input:checkbox></Input:checkbox> </h3> </legend>
+    </center>
+        <div class="signUpBox" style="background-color: #e0f7fa; padding: 5em; border-radius: 30px; margin: 2em;">
+        <form method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <br/><br/>
+            <div class="row">
+                <button type="submit" class="waves-effect blue lighten-1 hoverable btn-large col s6 offset-s3 offset+s3">Enter Otp</button>
+               <!-- <p class="col s6 offset-s3" style="vertical-align: text-top;"><a class="waves-effect teal lighten-1 hoverable btn-small" style="margin:20px;">Resend Otp</a> </p> -->
+            </div>
+            <div class="row">
+                <a class="waves-effect blue lighten-1 hoverable btn-small s4 offset-s8" href="/resend_otp">Resend OTP</a>
+            </div>
+        </form>
+        </div>
+        
+
+      
+</body>
+{% endblock content %}
+
